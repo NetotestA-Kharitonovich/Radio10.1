@@ -1,29 +1,33 @@
 package ru.netology;
 
 public class Radio {
+    final int maxStation;
     static final int minStation = 0;
-    static final int maxStation = 9;
     private int currentStation;
+    static final int maxVolume = 100;
     static final int minVolume = 0;
-    static final int maxVolume = 10;
-    private int currentVolume;
+    private int currentVolume = 30;
+
+    public Radio() {
+        this.maxStation = 9;
+    }
+
+    public Radio(int counterStation) {
+        this.maxStation = counterStation - 1;
+    }
 
     public int getCurrentStation() {
         return currentStation;
     }
 
     public void setCurrentStation(int currentStation) {
+        if (currentStation < minStation || currentStation > maxStation) {
+            return;
+        }
         this.currentStation = currentStation;
     }
 
-    public void setSelectStation(int selectStation) { //выбор номера станции напрямую
-        if (selectStation < minStation || selectStation > maxStation) {
-            return;
-        }
-        this.currentStation = selectStation;
-    }
-
-    public void setNextStation() {
+    public void nextStation() {
         if (currentStation == maxStation) {
             this.currentStation = minStation;
         } else {
@@ -31,7 +35,7 @@ public class Radio {
         }
     }
 
-    public void setPrevStation() {
+    public void prevStation() {
         if (currentStation == minStation) {
             this.currentStation = maxStation;
         } else {
@@ -44,21 +48,24 @@ public class Radio {
     }
 
     public void setCurrentVolume(int currentVolume) {
-        this.currentVolume = currentVolume;
-    }
-
-    public void setVolumeDown() {
-        if (currentVolume == minVolume) {
+        if (currentVolume < minVolume || currentVolume > maxVolume) {
             return;
+        } else {
+            this.currentVolume = currentVolume;
         }
-        this.currentVolume = currentVolume - 1;
     }
 
-    public void setVolumeUp() {
+    public void volumeUp() {
         if (currentVolume == maxVolume) {
             return;
         }
         this.currentVolume = currentVolume + 1;
+    }
 
+    public void volumeDown() {
+        if (currentVolume == minVolume) {
+            return;
+        }
+        this.currentVolume = currentVolume - 1;
     }
 }

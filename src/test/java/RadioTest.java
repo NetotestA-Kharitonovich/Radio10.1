@@ -21,7 +21,7 @@ public class RadioTest {
     }, delimiter = ',')
     void setSelectStation(String nameTest, int inputSelectStation, int expectedStation) {
         Radio radio = new Radio();
-        radio.setSelectStation(inputSelectStation);
+        radio.setCurrentStation(inputSelectStation);
         assertEquals(radio.getCurrentStation(), expectedStation);
     }
 
@@ -36,7 +36,7 @@ public class RadioTest {
     void setNextStation(String nameTest, int oldCurrentStation, int expectedStation) {
         Radio radio = new Radio();
         radio.setCurrentStation(oldCurrentStation);
-        radio.setNextStation();
+        radio.nextStation();
         assertEquals(radio.getCurrentStation(), expectedStation);
     }
 
@@ -51,7 +51,7 @@ public class RadioTest {
     void setPrevCurrentStation(String nameTest, int oldCurrentStation, int expectedStation) {
         Radio radio = new Radio();
         radio.setCurrentStation(oldCurrentStation);
-        radio.setPrevStation();
+        radio.prevStation();
         assertEquals(radio.getCurrentStation(), expectedStation);
     }
 
@@ -60,13 +60,13 @@ public class RadioTest {
             "Проверка средних значений повышения громкости, 5, 6",
             "Проверка нижней границы(0), 0, 1",
             "Проверка нижней границы(1), 1, 2",
-            "Проверка верхней границы(9), 9, 10",
-            "Проверка верхней границы(10), 10, 10",
+            "Проверка верхней границы(9), 99, 100",
+            "Проверка верхней границы(10), 100, 100",
     }, delimiter = ',')
     void setVolumeUp(String nameTest, int oldCurrentVolume, int expectedVolume) {
         Radio radio = new Radio();
         radio.setCurrentVolume(oldCurrentVolume);
-        radio.setVolumeUp();
+        radio.volumeUp();
         assertEquals(radio.getCurrentVolume(), expectedVolume);
     }
 
@@ -75,13 +75,13 @@ public class RadioTest {
             "Проверка средних значений понижения громкости, 5, 4",
             "Проверка нижней границы(0), 0, 0",
             "Проверка нижней границы(1), 1, 0",
-            "Проверка верхней границы(9), 9, 8",
-            "Проверка верхней границы(10), 10, 9",
+            "Проверка верхней границы(9), 99, 98",
+            "Проверка верхней границы(10), 100, 99",
     }, delimiter = ',')
     void setVolumeDown(String nameTest, int oldCurrentVolume, int expectedVolume) {
         Radio radio = new Radio();
         radio.setCurrentVolume(oldCurrentVolume);
-        radio.setVolumeDown();
+        radio.volumeDown();
         assertEquals(radio.getCurrentVolume(), expectedVolume);
     }
 }
